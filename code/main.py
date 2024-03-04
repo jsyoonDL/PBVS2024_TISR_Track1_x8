@@ -3,7 +3,9 @@
 Created on Wed Feb 14 10:56:52 2024
 
 @author: user
+
 This code is based on the PyTorch-GAN code (https://github.com/eriklindernoren/PyTorch-GAN)
+
 """
 
 import time
@@ -119,11 +121,8 @@ def train(model_gen, model_dis,params):
     loss_func_pix = CharbonnierLoss().to(device)
 
     loss_func_dis = nn.BCEWithLogitsLoss().to(device)
-
-    psnr = Loss_PSNR().to(device)
     loss_func_mse = nn.MSELoss().to(device)
-    loss_func_l1 = nn.L1Loss().to(device)
-    
+  
     
     loss_hist = {'tr':[],
                  'val':[],
@@ -260,7 +259,7 @@ def train(model_gen, model_dis,params):
                     if init_chk_loss > tot_val_loss.avg:
                         os.makedirs(path2models+'/gen_bst', exist_ok=True) 
                         os.makedirs(path2models+'/dis_bst', exist_ok=True)
-                        torch.save(model_gen.state_dict(), os.path.join(path2models, 'gen_bst/weights_gen_SR_bst'+str(batch_count)+'.pt'))       
+                        torch.save(model_gen.state_dict(), os.path.join(path2models, 'gen_bst/weights_gen_bst'+str(batch_count)+'.pt'))       
                         torch.save(model_dis.state_dict(), os.path.join(path2models, 'dis_bst/weights_dis_bst'+str(batch_count)+'.pt')) 
                         
                         init_chk_loss = tot_val_loss.avg
@@ -268,13 +267,13 @@ def train(model_gen, model_dis,params):
                     if batch_count % 5000 == 0: #check point save
                         os.makedirs(path2models+'/gen_chk', exist_ok=True) 
                         os.makedirs(path2models+'/dis_chk', exist_ok=True)
-                        torch.save(model_gen.state_dict(), os.path.join(path2models, 'gen_chk/weights_gen_SR_chk_pnt'+str(batch_count)+'.pt'))       
+                        torch.save(model_gen.state_dict(), os.path.join(path2models, 'gen_chk/weights_gen_chk_pnt'+str(batch_count)+'.pt'))       
                         torch.save(model_dis.state_dict(), os.path.join(path2models, 'dis_chk/weights_dis_chk_pnt'+str(batch_count)+'.pt'))  
                         noise_factor = noise_factor*.5 # noise weigts degradation
                     
                     
                     # visualization   
-                    fig = plt.figure(0,figsize=(10,10))       
+                    fig = plt.figure(0,figsize=(20,20))       
 
                     idx = 0
                     for ii in range(0,3):
@@ -293,7 +292,7 @@ def train(model_gen, model_dis,params):
                         
                     fig.tight_layout()     
  
-                    fig_save_path = 'intermidiate_result_x8_step1'
+                    fig_save_path = 'intermidiate_result_x8_phase1'
                     os.makedirs(fig_save_path, exist_ok=True)
                     
                     fig.savefig(fig_save_path +'/Itr_'+str(batch_count)+'.png')
@@ -319,7 +318,7 @@ pretrained_model = torch.load('TrainedModels/SwinIRs48w8_x8/001_classicalSR_DIV2
 model_gen.load_state_dict(pretrained_model[param_key_g] if param_key_g in pretrained_model.keys() else pretrained_model, strict=True)
 model_gen.to(device)
 
-path2models = 'model_trained_x8_step1'
+path2models = 'model_trained_x8_phase1'
 
 
 #%% def. discriminator    
@@ -341,7 +340,7 @@ params = {
     'beta2':0.999,
     'batch_size':14, # 12
     'lambda_vals': [1e-6,1,1e-6], # 1e-3,1,1e-3
-    'path2img': {'tr':'../data/dataset_CIDIS_sisr_x8/thermal/train/GT','te':'../data/dataset_CIDIS_sisr_x8/thermal/val/LR_x8'},
+    'path2img': {'tr':'../dataset_CIDIS_sisr_x8/thermal/train/GT','te':'../dataset_CIDIS_sisr_x8/thermal/val/LR_x8'},
     'path2models': path2models,
     'device':device,
     'transform': transform,
