@@ -3,6 +3,7 @@
 Created on Wed Feb 14 10:56:52 2024
 
 @author: user
+This code is based on the PyTorch-GAN code (https://github.com/eriklindernoren/PyTorch-GAN)
 """
 
 import time
