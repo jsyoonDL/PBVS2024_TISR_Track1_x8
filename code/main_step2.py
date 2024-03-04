@@ -24,9 +24,9 @@ import torch.multiprocessing
 from Discriminator import Discriminator
 from SwinIR import SwinIR
 
-from Datasetv2 import *
+from Dataset_step2 import *
 from loss import *
-from pytorch_msssim import ssim,ms_ssim
+from pytorch_msssim import ssim
 import torch.nn.functional as F
 
 
