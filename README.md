@@ -1,1 +1,3 @@
-PBVS 2024 - track 1 - TISR x8 code
+Thermal Images Super-resolution challenge - Track 1 (https://codalab.lisn.upsaclay.fr/competitions/17013)
+
+3rd placed
