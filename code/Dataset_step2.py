@@ -25,7 +25,7 @@ class DatasetTrain(Dataset):
         self.aug_flip = aug_flip
         
         self.img_path_list = []
-        for ext in ['.bmp','.png','.jpg','tiff','tif','jpeg']: #
+        for ext in ['.bmp']: #
             self.img_path_list+=sorted(glob.glob(path2img+'/*'+ext))
         
         if transform :
