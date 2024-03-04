@@ -33,7 +33,7 @@ for img_path in tqdm(img_list[:600], desc = 'train_data_gen.'):
     
     
     
-    cv2.imwrite(save_path_gt+'/DIV2K'+img_num_str+'.bmp', img)
+    cv2.imwrite(save_path_gt+'/DIV2K'+img_num_str+'.png', img)
     i+=1
 #%%
 path = 'RGB/Urban100/Urban100/image_SRF_4/*HR.png'
@@ -57,5 +57,5 @@ for img_path in tqdm(img_list,desc = 'train_data_gen.'):
     
     
     
-    cv2.imwrite(save_path_gt+'/Urban'+img_num_str+'.bmp', img)
+    cv2.imwrite(save_path_gt+'/Urban'+img_num_str+'.png', img)
     i+=1
