@@ -340,7 +340,7 @@ params = {
     'beta2':0.999,
     'batch_size':14, # 12
     'lambda_vals': [1e-6,1,1e-6], # 1e-3,1,1e-3
-    'path2img': {'tr':'../dataset_CIDIS_sisr_x8/thermal/train/GT','te':'../dataset_CIDIS_sisr_x8/thermal/val/LR_x8'},
+    'path2img': {'tr':'../data/dataset_CIDIS_sisr_x8/thermal/train/GT','te':'../data/dataset_CIDIS_sisr_x8/thermal/val/LR_x8'},
     'path2models': path2models,
     'device':device,
     'transform': transform,
