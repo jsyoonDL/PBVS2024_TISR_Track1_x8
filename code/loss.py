@@ -2,7 +2,7 @@
 """
 Created on Thu Feb  1 18:04:27 2024
 
-@author: yjs
+@author: user
 """
 
 import torch
