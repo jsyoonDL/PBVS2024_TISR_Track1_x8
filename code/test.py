@@ -34,7 +34,7 @@ def set_seed(seed = 0):
     torch.backends.cudnn.benchmark = True
     # Set a fixed value for the hash seedTrue
     os.environ['PYTHONHASHSEED'] = str(seed)
-#%%
+#%% https://github.com/Jinwoo1126/Dacon_SR/blob/main/inference_rrdbnetrot.py
 def GEOMETERY_ENSEMBLE(upsampler, img, outscale):
     flip = [False, True]
     rotate = [0,90,180,270]
@@ -91,7 +91,7 @@ device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 model_gen1 = SwinIR(upscale=8, img_size=(48, 48), in_chans=3,
                 window_size=8, img_range=1., depths=[6, 6, 6, 6, 6, 6],
                 embed_dim=180, num_heads=[6, 6, 6, 6, 6, 6], mlp_ratio=2, upsampler='pixelshuffle')
-weights1 = torch.load('model_trained_x8_bst/SwinIR_1.pt')
+weights1 = torch.load('TrainedModels/model_trained_x8_bst/SwinIR_1.pt')
 
 
 model_gen1.load_state_dict(weights1)
@@ -100,7 +100,7 @@ model_gen1.to(device)
 model_gen2 = SwinIR(upscale=8, img_size=(48, 48), in_chans=3,
                 window_size=8, img_range=1., depths=[6, 6, 6, 6, 6, 6],
                 embed_dim=180, num_heads=[6, 6, 6, 6, 6, 6], mlp_ratio=2, upsampler='pixelshuffle')
-weights2 = torch.load('model_trained_x8_bst/SwinIR_2.pt')
+weights2 = torch.load('TrainedModels/model_trained_x8_bst/SwinIR_2.pt')
 
 
 model_gen2.load_state_dict(weights2)
@@ -110,12 +110,12 @@ model_gen2.to(device)
 model_gen3 = SwinIR(upscale=8, img_size=(48, 48), in_chans=3,
                 window_size=8, img_range=1., depths=[6, 6, 6, 6, 6, 6],
                 embed_dim=180, num_heads=[6, 6, 6, 6, 6, 6], mlp_ratio=2, upsampler='pixelshuffle')
-weights3 = torch.load('model_trained_x8_bst/SwinIR_3.pt')
+weights3 = torch.load('TrainedModels/model_trained_x8_bst/SwinIR_3.pt')
 model_gen3.load_state_dict(weights3)
 model_gen3.to(device)
 
 
-path = '../data/dataset_CIDIS_sisr_x8/thermal/test/sisr_x8/LR_x8'
+path = '../dataset_CIDIS_sisr_x8/thermal/test/sisr_x8/LR_x8'
 img_list = sorted(glob.glob(path+'/*.bmp'))
 
 save_path = 'test_result'
