@@ -351,7 +351,6 @@ params = {
     'batch_count': batch_count,
     'img_size': [384,384],
 }
-# Dataset : https://github.com/ChaofWang/Awesome-Super-Resolution/blob/master/dataset.md
 #%% output with time complexity  
 
 in_time = time.time() 
