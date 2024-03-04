@@ -115,7 +115,7 @@ model_gen3.load_state_dict(weights3)
 model_gen3.to(device)
 
 
-path = '../dataset_CIDIS_sisr_x8/thermal/test/sisr_x8/LR_x8'
+path = '../data/dataset_CIDIS_sisr_x8/thermal/test/sisr_x8/LR_x8'
 img_list = sorted(glob.glob(path+'/*.bmp'))
 
 save_path = 'test_result'
