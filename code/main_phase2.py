@@ -3,7 +3,6 @@
 Created on Thu Feb 29 00:08:35 2024
 
 @author: user
-This code is based on the PyTorch-GAN code (https://github.com/eriklindernoren/PyTorch-GAN)
 """
 
 import time
@@ -294,7 +293,7 @@ def train(model_gen, model_dis,params):
                         
                     fig.tight_layout()     
  
-                    fig_save_path = 'intermidiate_result_x8_v28'
+                    fig_save_path = 'intermidiate_result_x8_phase2'
                     os.makedirs(fig_save_path, exist_ok=True)
                     
                     fig.savefig(fig_save_path +'/Itr_'+str(batch_count)+'.png')
@@ -315,18 +314,18 @@ model_gen = SwinIR(upscale=8, in_chans=3, img_size=(48,48), window_size=8,
                 img_range=1., depths=[6, 6, 6, 6, 6, 6], embed_dim=180, num_heads=[6, 6, 6, 6, 6, 6],
                 mlp_ratio=2, upsampler='pixelshuffle', resi_connection='1conv')
 
-weights = torch.load('model_trained_x8_step1/gen_bst/weights_gen_bst0.pt')
+weights = torch.load('model_trained_x8_phase1/gen_bst/weights_gen_bst0.pt')
 
 model_gen.load_state_dict(weights)
 
 model_gen.to(device)
 
-path2models = 'model_trained_x8_v28'
+path2models = 'model_trained_x8_phase2'
 
 
 #%% def. discriminator    
 model_dis = Discriminator(input_shape=(3,384,384))
-weights_dis = torch.load('model_trained_x8_step1/dis_bst/weights_dis_bst0.pt')
+weights_dis = torch.load('model_trained_x8_phase1/dis_bst/weights_dis_bst0.pt')
 model_dis.load_state_dict(weights_dis)
 
 model_dis.to(device)
